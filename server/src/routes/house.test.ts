@@ -16,5 +16,6 @@ test('GET request to get house that does not exist', async (done) => {
   const res = await request.get('/houses/11')
   // should return a 400 response with a Bad Request Error
   expect(res.status).toBe(400)
+  expect(res.body.code).toEqual('BadRequest')
   done()
 })
