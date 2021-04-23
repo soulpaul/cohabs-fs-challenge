@@ -1,4 +1,5 @@
 import restify from 'restify'
+import corsMiddleware from 'restify-cors-middleware'
 
 import routes from './routes'
 
@@ -7,5 +8,13 @@ import routes from './routes'
  * able to run tests on its endpoints
  */
 export const server = restify.createServer({ name: 'Cohabs-test' })
+const cors = corsMiddleware({
+  origins: ['http://localhost:3000'],
+  allowHeaders: [],
+  exposeHeaders: [],
+})
+server.pre(cors.preflight)
+server.use(cors.actual)
 server.use(restify.plugins.bodyParser())
+
 routes(server)
