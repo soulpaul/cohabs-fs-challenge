@@ -9,7 +9,7 @@ import routes from './routes'
  */
 export const server = restify.createServer({ name: 'Cohabs-test' })
 const cors = corsMiddleware({
-  origins: ['http://localhost:3000'],
+  origins: ['*'],
   allowHeaders: [],
   exposeHeaders: [],
 })

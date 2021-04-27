@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Paolo Pastore",
   "license": "MIT",
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "restify": "^8.5.1",
     "restify-cors-middleware": "^1.1.1",

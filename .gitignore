@@ -1,6 +1,9 @@
 # system files
 .DS_Store
 
+# error files
+yarn-error.log
+
 # IDE files
 .vscode/
 

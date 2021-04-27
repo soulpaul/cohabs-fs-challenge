@@ -21,7 +21,7 @@ export const locking = (houseId: number, lockId: number) => {
       if (house.locks && house.locks.length > 0) {
         // getting lock info by finding the index of the given lock in the locks array
         const lockIndex = house.locks?.map((lock) => lock.id).indexOf(lockId)
-        const lock = house.locks[lockIndex]
+        const lock = { ...house.locks[lockIndex] }
         // updating lock status for the new lock object. Changes are not yet reflected in the application state
         if (lock.status == 'locked') {
           lock.status = 'unlocked'
@@ -29,7 +29,9 @@ export const locking = (houseId: number, lockId: number) => {
           lock.status = 'locked'
         } else {
           // lock is offline so return bad request. An offline lock should not be called by the front end
-          reject(new BadRequestError('000h1: We are unable to process your request at this time'))
+          return reject(
+            new BadRequestError('000h1: We are unable to process your request at this time')
+          )
         }
         /**
          * Randomizing return errors
@@ -41,14 +43,16 @@ export const locking = (houseId: number, lockId: number) => {
         if (process.env.NODE_ENV === 'test' || randomInteger < 85) {
           // commit lock status in the application state and resolve Promise
           houses[houseIndex].locks![lockIndex] = lock
-          resolve(lock)
+          return resolve(lock)
         } else {
           // mocking a server error and Reject Promise
-          reject(new ServiceUnavailableError('Service unavailable'))
+          return reject(new ServiceUnavailableError('Service unavailable'))
         }
       } else {
         // should not happen, if it does it's an error made on the client side or it's a forged wrong request
-        reject(new BadRequestError('000h2: We are unable to process your request at this time'))
+        return reject(
+          new BadRequestError('000h2: We are unable to process your request at this time')
+        )
       }
     }, waitingTime)
   )

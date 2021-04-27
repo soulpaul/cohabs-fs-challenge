@@ -1,28 +1,45 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { normalize } from 'normalizr'
+import { normalize, denormalize } from 'normalizr'
 
 import { getHouses } from '../../app/api'
 import { houseSchema } from '../../app/schema'
+import { RootState } from '../../app/store'
 
 export const fetchHouses = createAsyncThunk('houses/fetchAll', async () => {
-  const response = await getHouses()
-  const normalized = normalize({ houses: response }, houseSchema)
-  return normalized
+  try {
+    const response = await getHouses()
+    const normalized = normalize({ houses: response }, houseSchema)
+    return normalized
+  } catch (error) {
+    throw error
+  }
 })
+
+interface ISliceState {
+  entities: {
+    house: {}
+  }
+  result: {}
+  loading: string
+  error: string | undefined
+  selected: number
+}
 
 export const houseSlice = createSlice({
   name: 'house',
   initialState: {
-    entities: {},
+    entities: {
+      house: {},
+    },
     result: {},
     loading: 'idle',
-    error: false,
+    error: undefined,
     selected: 0,
-  },
+  } as ISliceState,
   reducers: {
     dismissError(state) {
       if (state.error) {
-        state.error = false
+        state.error = undefined
       }
     },
     selectHouse(state, action: PayloadAction<number>) {
@@ -37,7 +54,7 @@ export const houseSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchHouses.fulfilled, (state, action) => {
-        state.entities = action.payload.entities
+        state.entities.house = { ...action.payload.entities.house }
         state.result = action.payload.result
         if ((state.loading = 'pending')) {
           state.loading = 'idle'
@@ -48,15 +65,18 @@ export const houseSlice = createSlice({
           state.loading = 'pending'
         }
       })
-      .addCase(fetchHouses.rejected, (state) => {
+      .addCase(fetchHouses.rejected, (state, action) => {
         if ((state.loading = 'pending')) {
           state.loading = 'idle'
-          state.error = true
+          state.error = action.error.message
         }
       })
   },
 })
 
 export const { selectHouse, deselectHouse, dismissError } = houseSlice.actions
+
+export const selectHouseList = (state: RootState) =>
+  denormalize(state.house.result, houseSchema, state.house.entities).houses
 
 export default houseSlice.reducer

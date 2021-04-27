@@ -2,26 +2,32 @@ import houseReducer, { selectHouse, deselectHouse, dismissError } from './houseS
 
 describe('houses reducer', () => {
   const initialState = {
-    entities: {},
+    entities: {
+      house: {},
+    },
     result: {},
     loading: 'idle',
-    error: false,
+    error: undefined,
     selected: 0,
   }
 
   const errorState = {
-    entities: {},
+    entities: {
+      house: {},
+    },
     result: {},
     loading: 'idle',
-    error: true,
+    error: 'Some error thrown',
     selected: 0,
   }
 
   const selectedHouseState = {
-    entities: {},
+    entities: {
+      house: {},
+    },
     result: {},
     loading: 'idle',
-    error: false,
+    error: undefined,
     selected: 1,
   }
 
