@@ -9,9 +9,9 @@ const theme = {
     lightPrimary: 'rgb(255,255,255)',
     lightSecondary: 'rgb(136,136,145)',
     darkPrimary: 'rgb(30,31,49)',
-    petrol: '',
-    blueMarine: '',
-    blueMarineAlpha7: '',
+    petrol: 'rgb(33,59,72)',
+    blueMarine: 'rgba(76, 171, 168, 1)',
+    blueMarineAlpha7: 'rgba(76, 171, 168, 0.7)',
   },
 }
 
