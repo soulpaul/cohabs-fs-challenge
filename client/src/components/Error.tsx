@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from '../styles'
 
 import { useAppSelector } from '../app/hooks'
 
@@ -29,7 +29,7 @@ const ErrorWrapper = styled.div`
     margin: 0;
   }
   p  {
-    color: #888891;
+    color: ${({ theme: { colors } }) => colors.lightSecondary};
     line-height: 1.5rem;
   }
 `

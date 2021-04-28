@@ -3,10 +3,7 @@ import React, { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { fetchHouses, selectHouseList } from './features/house/houseSlice'
 
-import Error from './components/Error'
-import HouseList from './components/HouseList'
-import Loader from './components/Loader'
-import LockList from './components/LockList'
+import { Error, HouseList, Loader, LockList } from './components'
 
 const MainRoute = () => {
   const dispatch = useAppDispatch()

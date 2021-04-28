@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css } from '../styles'
 
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { Danger, Locked, Unlocked } from '../components/Icons'
+import { IconDanger, IconLocked, IconUnlocked } from '../components' // same folder import. Look at index.ts
 import { toggleLockState, ILock as IProps } from '../features/lock/lockSlice'
 
 const Lock = ({ id, name, category, status }: IProps) => {
@@ -22,18 +22,21 @@ const Lock = ({ id, name, category, status }: IProps) => {
     }
   }, [dispatch, id, secureLocking, selectedHouse])
 
+  // need to call this multiple times, let's abstract. Also easier to understand just by looking at
+  // the name of the function
   const isStatusInactive = () => {
     return status === 'offline' || status === 'issue'
   }
 
+  // let's decide which icon to show using a function for better abstraction
   const Icon = () => {
     if (isStatusInactive()) {
-      return <Danger />
+      return <IconDanger />
     }
     if (status === 'locked' || status === 'unlocking...') {
-      return <Locked />
+      return <IconLocked />
     } else {
-      return <Unlocked />
+      return <IconUnlocked />
     }
   }
 
@@ -107,7 +110,7 @@ const RoomType = styled.span`
 
 const RoomStatus = styled.span`
   display: block;
-  color: #888891;
+  color: ${({ theme: { colors } }) => colors.lightSecondary};
 `
 
 const LockButtonWrapper = styled.button`
@@ -138,7 +141,7 @@ const CircleSvg = styled.svg<ICircleProps>`
   ${(props) => {
     if (props.lockStatus === 'unlocked' || props.lockStatus === 'locking...') {
       return css`
-        fill: rgba(76, 171, 168, 0.75);
+        fill: ${({ theme: { colors } }) => colors.blueMarineAlpha7};
       `
     } else if (props.lockStatus === 'offline') {
       return css`
@@ -150,7 +153,7 @@ const CircleSvg = styled.svg<ICircleProps>`
     if (props.secureLocking) {
       return css`
         circle {
-          stroke: rgba(76, 171, 168, 1);
+          stroke: ${({ theme: { colors } }) => colors.blueMarine};
           stroke-width: 3px;
           stroke-dasharray: 283;
           stroke-linecap: round;

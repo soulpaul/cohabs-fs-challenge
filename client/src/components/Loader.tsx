@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from '../styles'
 
-import { Loader as IconLoader } from './Icons'
+import { IconLoader } from './' //same folder import, look at index.ts
 
 const Loader = () => (
   <LoaderWrapper>
@@ -21,6 +21,6 @@ const LoaderWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   p {
-    color: #888891;
+    color: ${({ theme: { colors } }) => colors.lightSecondary};
   }
 `

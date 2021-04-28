@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { Normalize } from 'styled-normalize'
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, Theme } from './styles'
 import { store } from './app/store'
 import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker'
@@ -23,11 +23,13 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Normalize />
-      <GlobalStyle />
-      <App />
-    </Provider>
+    <Theme>
+      <Provider store={store}>
+        <Normalize />
+        <GlobalStyle />
+        <App />
+      </Provider>
+    </Theme>
   </React.StrictMode>,
   document.getElementById('root')
 )

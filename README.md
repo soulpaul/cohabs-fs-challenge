@@ -22,6 +22,6 @@ If you want to run tests for the server just run `yarn test`
 ### Run the client
 
 Once you have started the server you are now ready to start the client. `cd` into the client folder.
-If you want to run the client and test the application from your pc skip this part.
+If you want to run the client and test the application from your pc using Chrome dev tools for mobile phones skip this part.
 If you wanto to run the client from a mobile using react local network proxy please edit `.env` file. Write your network ip, the one you can see by running `yarn start` where stated "On Your Network", as the `REACT_APP_HOST` environment variable.
 To start the server run `yarn start`. For tests use `yarn test`

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from '../styles'
 
 import { useAppDispatch } from '../app/hooks'
 import { selectHouse } from '../features/house/houseSlice'
@@ -42,12 +42,12 @@ const House = styled.button`
   width: calc(100% - 2rem);
   line-height: 1.2rem;
   padding: 1.5rem 1rem;
-  color: white;
+  color: ${({ theme: { colors } }) => colors.lightPrimary};
   background-color: transparent;
   font-size: 1.5rem;
   text-align: center;
   cursor: pointer;
-  border: 1px solid white;
+  border: 1px solid ${({ theme: { colors } }) => colors.lightPrimary};
   margin: 1rem;
   box-sizing: border-box;
 `

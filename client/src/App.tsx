@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from './styles'
 
-import Header from './components/Header'
+import { Header } from './components'
 import MainRoute from './MainRoute'
 
 function App() {
@@ -16,7 +16,7 @@ export default App
 
 const AppWrapper = styled.div`
   position: relative;
-  background-color: #1e1f31;
+  background-color: ${({ theme: { colors } }) => colors.darkPrimary};
   width: 100vw;
   height: 100vh;
   /* preventing text selection on tap hold using styles */

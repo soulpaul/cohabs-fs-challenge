@@ -10,8 +10,7 @@ import {
   selectLockList,
 } from '../features/lock/lockSlice'
 
-import Lock from './Lock'
-import Loader from './Loader'
+import { Loader, Lock } from './' // index export of same folder!
 
 const LockList = () => {
   const dispatch = useAppDispatch()
@@ -77,7 +76,7 @@ const InstructionMessage = styled.div`
   margin: 2rem;
   text-align: center;
   line-height: 1.8;
-  color: #888891;
+  color: ${({ theme: { colors } }) => colors.lightSecondary};
 `
 
 const ListWrapper = styled.div`
@@ -97,7 +96,7 @@ const MessageWrapper = styled.div`
 const Message = styled.p`
   text-align: center;
   line-height: 1.8;
-  color: #888891;
+  color: ${({ theme: { colors } }) => colors.lightSecondary};
   margin-bottom: 2rem;
 `
 const MessageLink = styled.a`
@@ -118,7 +117,7 @@ const NoLocks = styled.div`
     margin: 0;
   }
   p  {
-    color: #888891;
+    color: ${({ theme: { colors } }) => colors.lightSecondary};
     line-height: 1.5rem;
   }
 `

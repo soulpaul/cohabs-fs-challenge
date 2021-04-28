@@ -1,28 +1,28 @@
 import React from 'react'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css, keyframes } from '../styles'
 
-export const Locked = () => (
+export const IconLocked = () => (
   <Icon viewBox="0 0 24 24">
     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
   </Icon>
 )
 
-export const Unlocked = () => (
+export const IconUnlocked = () => (
   <Icon viewBox="0 0 24 24">
     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
     <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
   </Icon>
 )
 
-export const Back = () => (
+export const IconBack = () => (
   <Icon viewBox="0 0 24 24">
     <line x1="19" y1="12" x2="5" y2="12"></line>
     <polyline points="12 19 5 12 12 5"></polyline>
   </Icon>
 )
 
-export const Danger = () => (
+export const IconDanger = () => (
   <Icon viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="10"></circle>
     <line x1="12" y1="8" x2="12" y2="12"></line>
@@ -30,7 +30,7 @@ export const Danger = () => (
   </Icon>
 )
 
-export const Loader = () => (
+export const IconLoader = () => (
   <Icon rotating viewBox="0 0 24 24">
     <line x1="12" x2="12" y1="2" y2="6" />
     <line x1="12" x2="12" y1="18" y2="22" />
@@ -62,7 +62,7 @@ const rotating = css`
 `
 
 const Icon = styled.svg<IIconProps>`
-  stroke: white;
+  stroke: ${({ theme: { colors } }) => colors.lightPrimary};
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;

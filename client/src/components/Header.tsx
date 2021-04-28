@@ -1,10 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from '../styles'
 
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { deselectHouse } from '../features/house/houseSlice'
 
-import { Back } from './Icons'
+import { IconBack } from './' // same folder import. Look at index.ts
 
 const Header = () => {
   const dispatch = useAppDispatch()
@@ -13,7 +13,7 @@ const Header = () => {
     <HeaderWrapper>
       {selectedHouse > 0 && (
         <HomeButton onClick={() => dispatch(deselectHouse())}>
-          <Back />
+          <IconBack />
         </HomeButton>
       )}
       <PageTitle>{selectedHouse ? 'Doors Lock' : 'Houses'}</PageTitle>
@@ -37,7 +37,7 @@ const HomeButton = styled.button`
   line-height: 2rem;
   border: 0;
   background: transparent;
-  color: white;
+  color: ${({ theme: { colors } }) => colors.lightPrimary};
   cursor: pointer;
 `
 const PageTitle = styled.h1`
